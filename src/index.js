@@ -1,51 +1,43 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 
-let skiData = {
-  total: 50,
-  powder: 20,
-  backcountry: 10,
-  goal: 100
+let bookList = [
+  {"title": "The Sun Also Rises", "author": "Ernest Hemingway", "pages": 260},
+  {"title": "White Teeth", "author": "Zadie Smith","pages": 480},
+  {"title": "Cat's Cradle", "author": "Kurt Vonnegut", "pages":304}
+]
+
+const Book = ({title,author,pages}) => {
+  return (
+    <section>
+      <h2>{title}</h2>
+      <p>by: {author}</p>
+      <p>Pages: {pages} pages</p>
+    </section>
+  )
 }
 
-const getPercent = decimal => {
-  return decimal * 100 + '%'
+const Library = ({books}) => {
+  return (
+    <div>
+      {books.map(
+        (book,i)=>
+        <Book
+          key={i}
+          title={book.title}
+          author={book.author}
+          pages={book.pages}/>
+      )}
+
+    </div>
+  )
 }
-const calcGoalProgress = (total,goal) => {
-  return getPercent(total/goal)
-}
-
-const SkiDayCounter = ({total, powder, backcountry, goal}) => {
-  // const {total, powder, backcountry, goal} = this.props
-    return (
-      <section>
-        <div>
-          <p>Total Days: {total}</p>
-        </div>
-        <div>
-          <p>Powder Days: {powder}</p>
-        </div>
-        <div>
-          <p>Backcountry Days: {backcountry}</p>
-        </div>
-        <div>
-          <p>Goal Progress: {calcGoalProgress(total,goal)}</p>
-        </div>
-      </section>
-    )
-  }
 
 
 
 
-
-
+// <Book title="The Sun Also Rises" author="Ernest Hemingway" pages={260}/>
 
 ReactDOM.render(
-<SkiDayCounter
-  total={skiData.total}
-  powder={skiData.powder}
-  backcountry={skiData.backcountry}
-  goal={skiData.goal}
-  />,
+<Library books={bookList} />,
    document.getElementById('root'))
