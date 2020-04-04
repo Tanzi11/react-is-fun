@@ -17,9 +17,27 @@ const Book = ({title,author,pages}) => {
   )
 }
 
-const Library = ({books}) => {
+class Library extends Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      open: false
+    }
+    this.toggleOpenClosed = this.toggleOpenClosed.bind(this)
+  }
+
+toggleOpenClosed() {
+  this.setState=({
+    open: !this.state.open
+  })
+}
+
+  render() {
+    const {books} = this.props
   return (
     <div>
+    <h1>This library is {this.state.open ? 'open' : 'closed'}</h1>
+    <button onClick={this.toggleOpenClosed.open}>Change</button>
       {books.map(
         (book,i)=>
         <Book
@@ -28,9 +46,9 @@ const Library = ({books}) => {
           author={book.author}
           pages={book.pages}/>
       )}
-
     </div>
-  )
+    )
+  }
 }
 
 
