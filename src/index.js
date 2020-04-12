@@ -18,10 +18,29 @@ const Book = ({title,author,pages,freeBookmark}) => {
   )
 }
 
+const Hiring = () =>
+<div>
+<p>The library is hiring. Please call Ms. Getta Ajob at (444) 1212-999.</p>
+</div>
+
+const NotHiring = () =>
+<div>
+  <p>Currently, the librrary is not hiring. But who knows, one day...</p>
+</div>
+
 class Library extends Component {
   state = {
     open: false,
-    freeBookmark: false
+    freeBookmark: false,
+    hiring: true
+  }
+
+  componentDidMount() {
+    console.log("The component is now mounted.")
+  }
+
+  componentDidUpdate() {
+    console.log("The component is updated.")
   }
 
 toggleOpenClosed = () => {
@@ -34,6 +53,7 @@ toggleOpenClosed = () => {
     const {books} = this.props
   return (
     <div>
+      {this.state.hiring? <Hiring /> : <NotHiring />}
     <h1>This library is {this.state.open ? 'open' : 'closed'}</h1>
     <button onClick={this.toggleOpenClosed}>Change</button>
       {books.map(
