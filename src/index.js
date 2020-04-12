@@ -7,29 +7,27 @@ let bookList = [
   {"title": "Cat's Cradle", "author": "Kurt Vonnegut", "pages":304}
 ]
 
-const Book = ({title,author,pages}) => {
+const Book = ({title,author,pages, freeBookmark}) => {
   return (
     <section>
       <h2>{title}</h2>
       <p>by: {author}</p>
       <p>Pages: {pages} pages</p>
+      <p>Free Bookmark Today: {freeBookmark? 'yes': 'no'}</p>
     </section>
   )
 }
 
 class Library extends Component {
-  constructor(props){
-    super(props)
-    this.state = {
-      open: false
-    }
-    this.toggleOpenClosed = this.toggleOpenClosed.bind(this)
+  state = {
+    open: false,
+    freeBookmark: false
   }
 
-toggleOpenClosed() {
-  this.setState=({
-    open: !this.state.open
-  })
+toggleOpenClosed = () => {
+  this.setState(prevState => ({
+    open: !prevState.open
+  }))
 }
 
   render() {
@@ -37,14 +35,15 @@ toggleOpenClosed() {
   return (
     <div>
     <h1>This library is {this.state.open ? 'open' : 'closed'}</h1>
-    <button onClick={this.toggleOpenClosed.open}>Change</button>
+    <button onClick={this.toggleOpenClosed}>Change</button>
       {books.map(
         (book,i)=>
         <Book
           key={i}
           title={book.title}
           author={book.author}
-          pages={book.pages}/>
+          pages={book.pages}
+          freeBookmark={this.state.freeBookmark}/>
       )}
     </div>
     )
