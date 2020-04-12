@@ -7,7 +7,7 @@ let bookList = [
   {"title": "Cat's Cradle", "author": "Kurt Vonnegut", "pages":304}
 ]
 
-const Book = ({title,author,pages, freeBookmark}) => {
+const Book = ({title,author,pages,freeBookmark}) => {
   return (
     <section>
       <h2>{title}</h2>
